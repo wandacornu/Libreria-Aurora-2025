@@ -1,0 +1,162 @@
+[
+  {
+    "id": "b01",
+    "name": "Cien años de soledad",
+    "author": "Gabriel García Márquez",
+    "price": 45000,
+    "category": "Ficción",
+    "rating": 4.9,
+    "image": "assets/covers/b01.svg",
+    "description": "Edición conmemorativa. Realismo mágico en Macondo."
+  },
+  {
+    "id": "b02",
+    "name": "Sapiens: De animales a dioses",
+    "author": "Yuval Noah Harari",
+    "price": 59000,
+    "category": "Historia",
+    "rating": 4.8,
+    "image": "assets/covers/b02.svg",
+    "description": "Un recorrido por la historia de la humanidad."
+  },
+  {
+    "id": "b03",
+    "name": "El Principito",
+    "author": "Antoine de Saint-Exupéry",
+    "price": 25000,
+    "category": "Infantil",
+    "rating": 4.9,
+    "image": "assets/covers/b03.svg",
+    "description": "Clásico universal ilustrado."
+  },
+  {
+    "id": "b04",
+    "name": "Breves respuestas a las grandes preguntas",
+    "author": "Stephen Hawking",
+    "price": 38000,
+    "category": "Ciencia",
+    "rating": 4.7,
+    "image": "assets/covers/b04.svg",
+    "description": "Reflexiones del físico sobre el universo."
+  },
+  {
+    "id": "b05",
+    "name": "Batman: Año Uno",
+    "author": "Frank Miller",
+    "price": 32000,
+    "category": "Cómics",
+    "rating": 4.6,
+    "image": "assets/covers/b05.svg",
+    "description": "Origen canónico del Caballero Oscuro."
+  },
+  {
+    "id": "b06",
+    "name": "Física para todos",
+    "author": "Carlo Rovelli",
+    "price": 41000,
+    "category": "Ciencia",
+    "rating": 4.5,
+    "image": "assets/covers/b06.svg",
+    "description": "Ensayos breves y claros sobre ciencia moderna."
+  },
+  {
+    "id": "b07",
+    "name": "Don Quijote de la Mancha",
+    "author": "Miguel de Cervantes",
+    "price": 52000,
+    "category": "Clásicos",
+    "rating": 4.8,
+    "image": "assets/covers/b07.svg",
+    "description": "La gran novela caballeresca y su crítica social."
+  },
+  {
+    "id": "b08",
+    "name": "La invención de la naturaleza",
+    "author": "Andrea Wulf",
+    "price": 42000,
+    "category": "Historia",
+    "rating": 4.6,
+    "image": "assets/covers/b08.svg",
+    "description": "La vida de Alexander von Humboldt y su legado."
+  },
+  {
+    "id": "b09",
+    "name": "1984",
+    "author": "George Orwell",
+    "price": 36000,
+    "category": "Ficción",
+    "rating": 4.8,
+    "image": "assets/covers/b09.svg",
+    "description": "Distopía clásica sobre vigilancia y libertad."
+  },
+  {
+    "id": "b10",
+    "name": "El nombre de la rosa",
+    "author": "Umberto Eco",
+    "price": 39000,
+    "category": "Ficción",
+    "rating": 4.7,
+    "image": "assets/covers/b10.svg",
+    "description": "Misterio medieval en una abadía benedictina."
+  },
+  {
+    "id": "b11",
+    "name": "Cosmos",
+    "author": "Carl Sagan",
+    "price": 45000,
+    "category": "Ciencia",
+    "rating": 4.9,
+    "image": "assets/covers/b11.svg",
+    "description": "Una exploración poética del universo."
+  },
+  {
+    "id": "b12",
+    "name": "Historia mínima de Argentina",
+    "author": "H. Sábato (comp.)",
+    "price": 34000,
+    "category": "Historia",
+    "rating": 4.3,
+    "image": "assets/covers/b12.svg",
+    "description": "Síntesis clara de procesos y actores."
+  },
+  {
+    "id": "b13",
+    "name": "Mafalda (Antología)",
+    "author": "Quino",
+    "price": 30000,
+    "category": "Cómics",
+    "rating": 4.9,
+    "image": "assets/covers/b13.svg",
+    "description": "Humor gráfico argentino e inteligente."
+  },
+  {
+    "id": "b14",
+    "name": "Orgullo y prejuicio",
+    "author": "Jane Austen",
+    "price": 33000,
+    "category": "Clásicos",
+    "rating": 4.7,
+    "image": "assets/covers/b14.svg",
+    "description": "Romance y crítica social en la Inglaterra georgiana."
+  },
+  {
+    "id": "b15",
+    "name": "Ciencia para no científicos",
+    "author": "Varias autoras",
+    "price": 28000,
+    "category": "Ciencia",
+    "rating": 4.2,
+    "image": "assets/covers/b15.svg",
+    "description": "Divulgación accesible para todos los públicos."
+  },
+  {
+    "id": "b16",
+    "name": "Matilda",
+    "author": "Roald Dahl",
+    "price": 27000,
+    "category": "Infantil",
+    "rating": 4.8,
+    "image": "assets/covers/b16.svg",
+    "description": "La niña lectora que desafía a los adultos."
+  }
+]
