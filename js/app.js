@@ -45,23 +45,20 @@ function paginate(list){
   return { pageItems: list.slice(start, end), page: state.page, pages, total };
 }
 
-function renderPagination(pages, page) {
-    const nav = document.querySelector('.pagination');
-    if (!nav) return;
-    nav.innerHTML = '';
+function renderPagination(pages, page){
+  const nav = document.querySelector('.pagination');
+  if(!nav) return;
+  nav.innerHTML = '';
 
-    const prev = document.createElement('button');
-    prev.textContent = '‹ Anterior';
-    prev.disabled = page <= 1;
-    prev.onclick = () => { state.page--; applyFilters(); };
-
-    const info = document.createElement('span');
-    info.className = 'page-info';
-    info.textContent = `Página ${page} de ${pages}`;
-
-    nav.appendChild(prev);
-    nav.appendChild(info);
+  // Solo mostramos el botón "Siguiente" si no estamos en la última página
+  if(page < pages){
+    const next = document.createElement('button');
+    next.textContent = 'Siguiente ›';
+    next.onclick = () => { state.page++; applyFilters(); };
+    nav.appendChild(next);
+  }
 }
+
 
 function renderGrid(list){
   const grid = document.getElementById('grid'), empty = document.getElementById('empty');
@@ -107,31 +104,27 @@ function applyFilters(){
 
   if(state.q){
     const q = state.q.toLowerCase();
-    list = list.filter(p => 
+    list = list.filter(p =>
       p.name.toLowerCase().includes(q) ||
       (p.description?.toLowerCase().includes(q)) ||
       (p.author?.toLowerCase().includes(q))
     );
   }
+
   if(state.cat){
     list = list.filter(p => p.category === state.cat);
   }
+
   if(state.max){
     const m = Number(state.max);
     if(!Number.isNaN(m)) list = list.filter(p => p.price <= m);
   }
 
-  switch(state.sort){
-    case 'precio-asc': list.sort((a,b)=>a.price-b.price); break;
-    case 'precio-desc': list.sort((a,b)=>b.price-a.price); break;
-    case 'nombre-asc': list.sort((a,b)=>a.name.localeCompare(b.name)); break;
-    case 'nombre-desc': list.sort((a,b)=>b.name.localeCompare(a.name)); break;
-    default: /* relevancia: no-op */ break;
-  }
-
-  state.filtered = list;
-  renderGrid(list);
+  // 👉 Mostramos todo junto sin paginación
+  renderGrid(list);   
+  document.querySelector('.pagination').innerHTML = ''; 
 }
+
 
 function bindControls(){
   const q = document.getElementById('q'),
@@ -235,13 +228,7 @@ function bindContactForm() {
             [errName, errEmail, errSubject, errMsg].forEach(hide);
         });
     }
-}
-async function init(){
-  Cart.renderBadge();
-    bindControls();
-    bindContactForm();
-}
-  
+} 
   // Ir al inicio al hacer click en la marca (reset de filtros y paginación)
   const brand = document.querySelector('.brand');
   if (brand) {
