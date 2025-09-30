@@ -2,28 +2,28 @@ import { fmtCurrency, readJSON, debounce } from './utils.js';
 import { Cart } from './cart.js';
 
 const state = {
-  products: [],
-  filtered: [],
-  q: '',
-  cat: '',
-  sort: 'relevancia',
-  max: '',
-  page: 1,
-  pageSize: 8
+    products: [],
+    filtered: [],
+    q: '',
+    cat: '',
+    sort: 'relevancia',
+    max: '',
+    page: 1,
+    pageSize: 8
 };
 
 const views = {
-  catalogo: document.getElementById('view-catalogo'),
-  carrito: document.getElementById('view-carrito'),
-  libro: document.getElementById('view-book')
-  contacto: document.getElementById('view-contacto')
+    catalogo: document.getElementById('view-catalogo'),
+    carrito: document.getElementById('view-carrito'),
+    libro: document.getElementById('view-book'),
+    contacto: document.getElementById('view-contacto')
 };
 
-function show(view){
-  for(const v of Object.values(views)){ v.hidden = true; }
-  views[view].hidden = false;
-  window.scrollTo(0,0);
-  if(view==='carrito') Cart.renderList();
+function show(view) {
+    for (const v of Object.values(views)) v.hidden = true;
+    views[view].hidden = false;
+    window.scrollTo(0, 0);
+    if (view === 'carrito') Cart.renderList();
 }
 
 function renderCategories(list){
@@ -171,18 +171,27 @@ function handleRouting(){
   }
 }
 
-function renderBookDetail(id){
-  const p = state.products.find(x=>x.id===id);
-  if(!p){ document.getElementById('book-title').textContent='Libro no encontrado'; return; }
-  const img = document.getElementById('book-img');
-  if(img){ img.src = p.image || ''; img.alt = 'Portada de ' + p.name; }
-  document.getElementById('book-title').textContent = p.name;
-  document.getElementById('book-cat').textContent = p.category;
-  document.getElementById('book-author').textContent = p.author ? 'por ' + p.author : '';
-  document.getElementById('book-desc').textContent = p.description || '';
-  document.getElementById('book-price').textContent = fmtCurrency(p.price);
-  const add = document.getElementById('detail-add');
-  add.onclick = ()=> Cart.add(p, 1);
+function renderBookDetail(id) {
+    const p = state.products.find(x => x.id === id);
+    if (!p) {
+        document.getElementById('book-title').textContent = 'Libro no encontrado';
+        return; // 👈 importante, así corta si no lo encuentra
+    }
+
+    const img = document.getElementById('book-img');
+    if (img) {
+        img.src = p.image || '';
+        img.alt = 'Portada de ' + p.name;
+    }
+
+    document.getElementById('book-title').textContent = p.name;
+    document.getElementById('book-cat').textContent = p.category;
+    document.getElementById('book-author').textContent = p.author ? 'por ' + p.author : '';
+    document.getElementById('book-desc').textContent = p.description || '';
+    document.getElementById('book-price').textContent = fmtCurrency(p.price);
+
+    const add = document.getElementById('detail-add');
+    add.onclick = () => Cart.add(p, 1);
 }
 function bindContactForm() {
     const form = document.getElementById('contact-form');
@@ -258,20 +267,28 @@ async function init(){
     applyFilters();
     location.hash = '#/catalogo';
   });
-  window.addEventListener('hashchange', handleRouting);
+window.addEventListener('hashchange', handleRouting);
 
-  try{
-    const data = await readJSON('data/books.json');
-    state.products = data;
-    renderCategories(data);
-    applyFilters();
-  }catch(err){
-    console.error(err);
-    const grid = document.getElementById('grid');
-    if(grid) grid.innerHTML = '<p class="empty">No se pudo cargar el catálogo.</p>';
-  }
+async function init() {
+    Cart.renderBadge();
+    bindControls();
+    bindContactForm();
+    window.addEventListener('hashchange', handleRouting);
 
-  handleRouting();
+    try {
+        const data = await readJSON('data/books.json');
+        state.products = data;
+        renderCategories(data);
+        applyFilters();
+    } catch (err) {
+        console.error(err);
+        const grid = document.getElementById('grid');
+        if (grid) grid.innerHTML = '<p class="empty">No se pudo cargar el catálogo.</p>';
+    }
+
+    if (!location.hash) location.hash = '#/catalogo';
+    handleRouting();
 }
 
 init();
+
