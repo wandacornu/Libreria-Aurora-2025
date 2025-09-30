@@ -120,3 +120,61 @@ small.author{color:#444}
   left:1rem;top:1rem;width:auto;height:auto;background:#fff;padding:.5rem .75rem;
   border:1px solid var(--border);border-radius:.5rem;z-index:9999;
 }
+/* Contacto */
+.contact {
+    display: grid;
+    gap: .75rem;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1rem;
+    max-width: 760px
+}
+
+    .contact .row2 {
+        display: grid;
+        gap: .75rem
+    }
+
+    .contact .control {
+        display: flex;
+        flex-direction: column;
+        gap: .35rem
+    }
+
+    .contact input, .contact textarea {
+        background: #fff;
+        color: var(--ink);
+        border: 1px solid var(--border);
+        padding: .6rem .7rem;
+        border-radius: .6rem;
+        outline: none;
+    }
+
+        .contact input:focus, .contact textarea:focus {
+            border-color: #d9cdbf
+        }
+
+    .contact .actions {
+        display: flex;
+        gap: .5rem;
+        align-items: center
+    }
+
+    .contact .err {
+        color: #b00020
+    }
+
+    .contact .ok {
+        color: #14532d;
+        background: #ecfdf5;
+        border: 1px solid #bbf7d0;
+        padding: .5rem .75rem;
+        border-radius: .5rem
+    }
+
+@media(min-width:720px) {
+    .contact .row2 {
+        grid-template-columns: 1fr 1fr
+    }
+}

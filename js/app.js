@@ -16,6 +16,7 @@ const views = {
   catalogo: document.getElementById('view-catalogo'),
   carrito: document.getElementById('view-carrito'),
   libro: document.getElementById('view-book')
+  contacto: document.getElementById('view-contacto')
 };
 
 function show(view){
@@ -44,27 +45,22 @@ function paginate(list){
   return { pageItems: list.slice(start, end), page: state.page, pages, total };
 }
 
-function renderPagination(pages, page){
-  const nav = document.querySelector('.pagination');
-  if(!nav) return;
-  nav.innerHTML = '';
-  const prev = document.createElement('button');
-  prev.textContent = '‹ Anterior';
-  prev.disabled = page<=1;
-  prev.onclick = ()=>{ state.page--; applyFilters(); };
+function renderPagination(pages, page) {
+    const nav = document.querySelector('.pagination');
+    if (!nav) return;
+    nav.innerHTML = '';
 
-  const info = document.createElement('span');
-  info.className = 'page-info';
-  info.textContent = `Página ${page} de ${pages}`;
+    const prev = document.createElement('button');
+    prev.textContent = '‹ Anterior';
+    prev.disabled = page <= 1;
+    prev.onclick = () => { state.page--; applyFilters(); };
 
-  const next = document.createElement('button');
-  next.textContent = 'Siguiente ›';
-  next.disabled = page>=pages;
-  next.onclick = ()=>{ state.page++; applyFilters(); };
+    const info = document.createElement('span');
+    info.className = 'page-info';
+    info.textContent = `Página ${page} de ${pages}`;
 
-  nav.appendChild(prev);
-  nav.appendChild(info);
-  nav.appendChild(next);
+    nav.appendChild(prev);
+    nav.appendChild(info);
 }
 
 function renderGrid(list){
@@ -168,8 +164,10 @@ function handleRouting(){
     const id = hash.split('/')[1];
     renderBookDetail(id);
     show('libro');
+  } else if (hash === 'contacto') {
+      show('contacto');
   } else {
-    show(hash);
+      show(hash);
   }
 }
 
@@ -186,10 +184,54 @@ function renderBookDetail(id){
   const add = document.getElementById('detail-add');
   add.onclick = ()=> Cart.add(p, 1);
 }
+function bindContactForm() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
 
+    const name = document.getElementById('cname');
+    const email = document.getElementById('cemail');
+    const subject = document.getElementById('csubject');
+    const msg = document.getElementById('cmsg');
+    const ok = document.getElementById('contact-ok');
+
+    const errName = document.getElementById('err-name');
+    const errEmail = document.getElementById('err-email');
+    const errSubject = document.getElementById('err-subject');
+    const errMsg = document.getElementById('err-msg');
+
+    const hide = (el) => el && (el.hidden = true);
+
+    const validate = () => {
+        let valid = true;
+        if (!name.value.trim()) { errName.hidden = false; valid = false; } else hide(errName);
+        const ev = email.value.trim();
+        const emailOk = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(ev);
+        if (!emailOk) { errEmail.hidden = false; valid = false; } else hide(errEmail);
+        if (!subject.value.trim()) { errSubject.hidden = false; valid = false; } else hide(errSubject);
+        if (!msg.value.trim()) { errMsg.hidden = false; valid = false; } else hide(errMsg);
+        return valid;
+    };
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!validate()) return;
+        ok.hidden = false;
+        form.reset();
+    });
+
+    const clearBtn = document.getElementById('clear-msg');
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            form.reset(); ok.hidden = true;
+            [errName, errEmail, errSubject, errMsg].forEach(hide);
+        });
+    }
+}
 async function init(){
   Cart.renderBadge();
-  bindControls();
+    bindControls();
+    bindContactForm();
+}
   
   // Ir al inicio al hacer click en la marca (reset de filtros y paginación)
   const brand = document.querySelector('.brand');
